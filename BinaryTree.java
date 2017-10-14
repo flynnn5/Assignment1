@@ -7,7 +7,7 @@ public class BinaryTree<Key extends Comparable<Key>> {
 		Key key;
 		Node left;
 		Node right;
-
+		int N;
 		public Node(Key key) {
 			this.key = key;
 		}
@@ -29,9 +29,11 @@ public class BinaryTree<Key extends Comparable<Key>> {
 		}
 		return node;
 	}
-
-	private Node findLCA() {
-		return root;
+	public Key findLCA(Key k1, Key k2){
+		return findLCA(root, k1,k2).key;
+	}
+	private Node findLCA(Node root, Key k1, Key k2) {
+		
 	}
 
 	public BinaryTree() {
