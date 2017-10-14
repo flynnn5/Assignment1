@@ -1,20 +1,33 @@
 import java.util.NoSuchElementException;
 
 public class BinaryTree<Key extends Comparable<Key>> {
-	private Node root;
+	Node root;
 
-	private class Node {
-		private Key key;
-		private Node left, right;
+	class Node {
+		Key key;
+		Node left;
+		Node right;
 
 		public Node(Key key) {
 			this.key = key;
 		}
 	}
 
-	private Node put(Node x, Key key) {
+	public void put(Key key) {
+		root = put(root, key);
+	}
 
-		return null;
+	private Node put(Node node, Key key) {
+		if (node == null) {
+			return new Node(key);
+		}
+		int compare = key.compareTo(node.key);
+		if (compare > 0) {
+			node.right = put(node.right, key);
+		} else if (compare < 0) {
+			node.left = put(node.left, key);
+		}
+		return node;
 	}
 
 	private Node findLCA() {
