@@ -33,7 +33,21 @@ public class BinaryTree<Key extends Comparable<Key>> {
 		return findLCA(root, k1,k2).key;
 	}
 	private Node findLCA(Node root, Key k1, Key k2) {
-		
+		if (root ==null){
+			return null;
+		}
+		else if ((root.key == k1)||(root.key == k2)){
+			return root;
+		}
+		Node left = findLCA(root.left, k1,k2);
+		Node right = findLCA(root.right, k1,k2);
+		if ((left != null) && (right != null)){
+			return root;
+		}
+		if (left ==null && right == null){
+			return null;
+		}
+		return left != null?left:right;
 	}
 
 	public BinaryTree() {
