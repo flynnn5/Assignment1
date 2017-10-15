@@ -36,19 +36,19 @@ public class BinaryTreeTest {
 	public void testLCA(){
 		BinaryTree test = new BinaryTree();
 		test.put(6);
-		test.put(5);
-		test.put(1);
-		test.put(3);
 		test.put(2);
-		test.put(4);
 		test.put(8);
+		test.put(1);
+		test.put(4);
+		test.put(5);
+		test.put(3);
 		test.put(7);
 		test.put(9);
 		
 		assertEquals(test.findLCA(5,8), 6);
 		assertEquals(test.findLCA(7,9),8);
-		assertEquals(test.findLCA(2, 4),3);
-		assertEquals(test.findLCA(1, 3),5);
+		assertEquals(test.findLCA(3, 5),4);
+		assertEquals(test.findLCA(1, 4),2);
 		assertEquals(test.findLCA(7, 8),8);
 	}
 }
