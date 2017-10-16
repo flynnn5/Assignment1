@@ -29,6 +29,33 @@ public class BinaryTreeTest {
 		assertEquals(test.findLCA(1,2),1);
 	}
 	@Test
+	public void testOneParent(){
+		BinaryTree test = new BinaryTree();
+		test.put(2);
+		test.put(1);
+		test.put(3);
+		assertEquals(test.findLCA(3, 1),2);
+	}
+	@Test
+	public void testTwoParents(){
+		BinaryTree test = new BinaryTree();
+		test.put(2);
+		test.put(1);
+		test.put(4);
+		test.put(3);
+		test.put(5);
+		assertEquals (test.findLCA(1, 4),2);
+		assertEquals(test.findLCA(3,5),4);
+	}
+	@Test 
+	public void testNonExistingNode(){
+		BinaryTree test = new BinaryTree();
+		test.put(6);
+		test.put(4);
+		test.put(8);
+		assertEquals (test.findLCA(3, 66), null);
+	}
+	@Test
 	public void testPut() {
 		BinaryTree test = new BinaryTree();
 		test.put(10);
