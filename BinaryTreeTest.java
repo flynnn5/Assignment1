@@ -51,4 +51,9 @@ public class BinaryTreeTest {
 		assertEquals(test.findLCA(1, 4),2);
 		assertEquals(test.findLCA(7, 8),8);
 	}
+	@Test
+	public void testEmpty(){
+		BinaryTree test = new BinaryTree();
+		assertNull(test.findLCA(1, 2));
+	}
 }
