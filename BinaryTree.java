@@ -55,7 +55,31 @@ public class BinaryTree<Key extends Comparable<Key>> {
 		}
 		return left != null ? left : right;
 	}
-
+	public boolean exists(Key k1){
+		if (exists(root,k1)==k1){
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	private Key exists(Node n1, Key k1){
+		if (n1 == null){
+			return null;
+		}
+		else {
+			int compare = k1.compareTo(n1.key);
+			if (compare <0) {
+				return exists(n1.left, k1);
+			}
+			else if (compare >0) {
+				return exists(n1.right, k1);
+			}
+			else {
+				return n1.key;
+			}
+		}
+	}
 	public BinaryTree() {
 
 	}
