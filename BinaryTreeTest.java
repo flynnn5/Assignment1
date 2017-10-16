@@ -12,6 +12,23 @@ public class BinaryTreeTest {
 		assertEquals(test.root.key, 3);
 	}
 	@Test
+	public void testEmptyLCA(){
+		BinaryTree test = new BinaryTree();
+		assertNull(test.findLCA(1, 2));
+	}
+	@Test
+	public void testOneNode(){
+		BinaryTree test = new BinaryTree();
+		test.put(1);
+		assertEquals(test.findLCA(1,1),1);
+	}
+	public void testTwoNodes(){
+		BinaryTree test = new BinaryTree();
+		test.put(1);
+		test.put(2);
+		assertEquals(test.findLCA(1,2),1);
+	}
+	@Test
 	public void testPut() {
 		BinaryTree test = new BinaryTree();
 		test.put(10);
@@ -50,10 +67,5 @@ public class BinaryTreeTest {
 		assertEquals(test.findLCA(3, 5),4);
 		assertEquals(test.findLCA(1, 4),2);
 		assertEquals(test.findLCA(7, 8),8);
-	}
-	@Test
-	public void testEmpty(){
-		BinaryTree test = new BinaryTree();
-		assertNull(test.findLCA(1, 2));
 	}
 }
