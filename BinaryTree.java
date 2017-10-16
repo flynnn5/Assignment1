@@ -7,7 +7,6 @@ public class BinaryTree<Key extends Comparable<Key>> {
 		Key key;
 		Node left;
 		Node right;
-		int N;
 
 		public Node(Key key) {
 			this.key = key;
@@ -32,7 +31,7 @@ public class BinaryTree<Key extends Comparable<Key>> {
 	}
 
 	public Key findLCA(Key k1, Key k2) {
-		if (root == null) {
+		if ((root == null) || (!exists(k1)) || (!exists(k2))){
 			return null;
 		} else {
 			return findLCA(root, k1, k2).key;
@@ -55,31 +54,30 @@ public class BinaryTree<Key extends Comparable<Key>> {
 		}
 		return left != null ? left : right;
 	}
-	public boolean exists(Key k1){
-		if (exists(root,k1)==k1){
+
+	public boolean exists(Key k1) {
+		if (exists(root, k1) == k1) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
-	private Key exists(Node n1, Key k1){
-		if (n1 == null){
+
+	private Key exists(Node n1, Key k1) {
+		if (n1 == null) {
 			return null;
-		}
-		else {
+		} else {
 			int compare = k1.compareTo(n1.key);
-			if (compare <0) {
+			if (compare < 0) {
 				return exists(n1.left, k1);
-			}
-			else if (compare >0) {
+			} else if (compare > 0) {
 				return exists(n1.right, k1);
-			}
-			else {
+			} else {
 				return n1.key;
 			}
 		}
 	}
+
 	public BinaryTree() {
 
 	}
