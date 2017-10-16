@@ -56,6 +56,13 @@ public class BinaryTreeTest {
 		assertEquals (test.findLCA(3, 66), null);
 	}
 	@Test
+	public void testExists(){
+		BinaryTree test = new BinaryTree();
+		test.put(2);
+		assertTrue(test.exists(2));
+		assertFalse(test.exists(66));
+	}
+	@Test
 	public void testPut() {
 		BinaryTree test = new BinaryTree();
 		test.put(10);
