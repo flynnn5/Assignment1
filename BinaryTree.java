@@ -1,18 +1,18 @@
 import java.util.NoSuchElementException;
 
 public class BinaryTree<Key extends Comparable<Key>> {
-	Node root;
-
-	class Node {
+	 public class Node {
 		Key key;
 		Node left;
 		Node right;
 
 		public Node(Key key) {
 			this.key = key;
+			left = null;
+			right = null;
 		}
 	}
-
+	 Node root;
 	public void put(Key key) {
 		root = put(root, key);
 	}
@@ -31,7 +31,7 @@ public class BinaryTree<Key extends Comparable<Key>> {
 	}
 
 	public Key findLCA(Key k1, Key k2) {
-		if ((root == null) || (!exists(k1)) || (!exists(k2))){
+		if ((root == null) || (!exists(k1)) || (!exists(k2))) {
 			return null;
 		} else {
 			return findLCA(root, k1, k2).key;
@@ -76,9 +76,5 @@ public class BinaryTree<Key extends Comparable<Key>> {
 				return n1.key;
 			}
 		}
-	}
-
-	public BinaryTree() {
-
 	}
 }

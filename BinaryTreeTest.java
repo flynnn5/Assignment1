@@ -3,89 +3,77 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class BinaryTreeTest {
-
 	@Test
 	public void isEmpty() {
-		BinaryTree test = new BinaryTree();
+		BinaryTree<Integer> test = new BinaryTree<Integer>();
 		assertEquals(test.root, null);
 		test.put(3);
-		assertEquals(test.root.key, 3);
+		assertEquals("3",test.root.key.toString());
 	}
 	@Test
 	public void testEmptyLCA(){
-		BinaryTree test = new BinaryTree();
+		BinaryTree<Integer> test = new BinaryTree<Integer>();
 		assertNull(test.findLCA(1, 2));
 	}
 	@Test
 	public void testOneNode(){
-		BinaryTree test = new BinaryTree();
+		BinaryTree<Integer> test = new BinaryTree<Integer>();
 		test.put(1);
-		assertEquals(test.findLCA(1,1),1);
-	}
-	public void testTwoNodes(){
-		BinaryTree test = new BinaryTree();
-		test.put(1);
-		test.put(2);
-		assertEquals(test.findLCA(1,2),1);
+		assertEquals("1",test.findLCA(1,1).toString());
 	}
 	@Test
 	public void testOneParent(){
-		BinaryTree test = new BinaryTree();
+		BinaryTree<Integer> test = new BinaryTree<Integer>();
 		test.put(2);
 		test.put(1);
 		test.put(3);
-		assertEquals(test.findLCA(3, 1),2);
+		assertEquals("2",test.findLCA(3, 1).toString());
 	}
 	@Test
 	public void testTwoParents(){
-		BinaryTree test = new BinaryTree();
+		BinaryTree<Integer> test = new BinaryTree<Integer>();
 		test.put(2);
 		test.put(1);
 		test.put(4);
 		test.put(3);
 		test.put(5);
-		assertEquals (test.findLCA(1, 4),2);
-		assertEquals(test.findLCA(3,5),4);
+		assertEquals ("2",test.findLCA(1, 4).toString());
+		assertEquals("4",test.findLCA(3,5).toString());
 	}
 	@Test 
 	public void testNonExistingNode(){
-		BinaryTree test = new BinaryTree();
+		BinaryTree<Integer> test = new BinaryTree<Integer>();
 		test.put(6);
 		test.put(4);
 		test.put(8);
-		assertEquals (test.findLCA(3, 66), null);
+		assertNull(test.findLCA(55, 44));
+		assertNull(test.findLCA(33, 6));
+		assertNull(test.findLCA(4, 33));
 	}
 	@Test
 	public void testExists(){
-		BinaryTree test = new BinaryTree();
+		BinaryTree<Integer> test = new BinaryTree<Integer>();
 		test.put(2);
 		assertTrue(test.exists(2));
 		assertFalse(test.exists(66));
 	}
 	@Test
 	public void testPut() {
-		BinaryTree test = new BinaryTree();
+		BinaryTree<Integer> test = new BinaryTree<Integer>();
 		test.put(10);
 		test.put(2);
 		test.put(6);
 		test.put(1);
 		test.put(2);
-		test.put(3);
-		test.put(23);
-		test.put(7);
-		test.put(10);
-
-		assertEquals(test.root.key,10);
-		assertEquals(test.root.left.key,2);
-		assertEquals(test.root.left.right.key,6);
-		assertEquals(test.root.left.left.key,1);
-		assertEquals(test.root.right.key,23);
-		assertEquals(test.root.left.right.left.key,3);
-		assertEquals(test.root.left.right.right.key,7);
+		assertEquals("10",test.root.key.toString());
+		assertEquals("2",test.root.left.key.toString());
+		assertEquals("6",test.root.left.right.key.toString());
+		assertEquals("1",test.root.left.left.key.toString());
+		assertEquals("2",test.root.left.key.toString());
 	}
 	@Test
 	public void testLCA(){
-		BinaryTree test = new BinaryTree();
+		BinaryTree<Integer> test = new BinaryTree<Integer>();
 		test.put(6);
 		test.put(2);
 		test.put(8);
@@ -96,10 +84,10 @@ public class BinaryTreeTest {
 		test.put(7);
 		test.put(9);
 		
-		assertEquals(test.findLCA(5,8), 6);
-		assertEquals(test.findLCA(7,9),8);
-		assertEquals(test.findLCA(3, 5),4);
-		assertEquals(test.findLCA(1, 4),2);
-		assertEquals(test.findLCA(7, 8),8);
+		assertEquals("6",test.findLCA(5,8).toString());
+		assertEquals("8",test.findLCA(7,9).toString());
+		assertEquals("4",test.findLCA(3, 5).toString());
+		assertEquals("2",test.findLCA(1, 4).toString());
+		assertEquals("8",test.findLCA(7, 8).toString());
 	}
 }
