@@ -58,20 +58,6 @@ public class BinaryTreeTest {
 		assertFalse(test.exists(66));
 	}
 	@Test
-	public void testPut() {
-		BinaryTree<Integer> test = new BinaryTree<Integer>();
-		test.put(10);
-		test.put(2);
-		test.put(6);
-		test.put(1);
-		test.put(2);
-		assertEquals("10",test.root.key.toString());
-		assertEquals("2",test.root.left.key.toString());
-		assertEquals("6",test.root.left.right.key.toString());
-		assertEquals("1",test.root.left.left.key.toString());
-		assertEquals("2",test.root.left.key.toString());
-	}
-	@Test
 	public void testLCA(){
 		BinaryTree<Integer> test = new BinaryTree<Integer>();
 		test.put(6);
