@@ -15,22 +15,6 @@ public class DAG<Key extends Comparable<Key>> {
 	}
 	Node root;
 
-	public void put(Key key) {
-		root = put(root, key);
-	}
-
-	private Node put(Node node, Key key) {
-		if (node == null) {
-			return new Node(key);
-		}
-		int compare = key.compareTo(node.key);
-		if (compare > 0) {
-			node.next = put(node.next, key);
-		} else if (compare < 0) {
-			node.prev = put(node.prev, key);
-		}
-		return node;
-	}
 
 	public Key findLCA(Key k1, Key k2) {
 		if ((root == null) || (!exists(k1)) || (!exists(k2))) {

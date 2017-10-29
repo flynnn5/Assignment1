@@ -15,5 +15,15 @@ public class Node<String> {
 		noOfNodesIn =0;
 		noOfNodesOut = edgesTo.size();
 	}
+	//add an edge and connect a parent node to a child
+	public void connectChild(Node<String> child){
+		if (child != null){
+			this.edgesTo.add(child);
+			child.noOfNodesIn++;
+		}
+	}
+	
+	
+	
 	
 }
