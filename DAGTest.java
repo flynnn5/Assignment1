@@ -8,42 +8,50 @@ import org.junit.Test;
 public class DAGTest {
 	
 	@Test
-	public void testAncestorToString(){
+	public void testListOfAncestors(){
 		ArrayList<Node> nullList = DAG.listOfAncestors(null);
 		assertEquals("testing ancestry of null", "[]", DAG.ancestorsToString(nullList));
 		Node a = new Node ("a" ,1);
 		ArrayList<Node> aList = DAG.listOfAncestors(a);
 		String STRaList = DAG.ancestorsToString(aList);
 		assertEquals("Testing ancestry of a", "[]", STRaList);
+		
+		
 		Node b = new Node ("b", 2);
 		a.connectChild(b);
 		ArrayList<Node> bList =DAG.listOfAncestors(b);
 		String STRbList = DAG.ancestorsToString(bList);
 		assertEquals("Testing one parent", "[a]", STRbList);
+		
+		
 		Node c = new Node ("c",3);
 		b.connectChild(c);
 		ArrayList<Node> cList = DAG.listOfAncestors(c);
 		String STRcList = DAG.ancestorsToString(cList);
-		assertEquals ("Testing two ancestors", "[a,b]", STRcList);
+		assertEquals ("Testing two ancestors", "[b,a]", STRcList);
+		
+		Node d = new Node("d", 4);
+		b.connectChild(d);
+		ArrayList<Node> dList = DAG.listOfAncestors(d);
+		String STRdList = DAG.ancestorsToString(dList);
+		assertEquals ("Testing two ancestors", "[b,a]", STRdList);
+		
+	
 	}
 	@Test
-	public void testListOfAncestors(){
-		
+	public void testEmptyLCA() {
+		ArrayList<Node> test = DAG.listOfAncestors(null);
+		assertEquals("Testing LCA on null", null, DAG.findLCA(null,null));
 	}
-	//@Test
-//	public void testEmptyLCA() {
-//		DAG<String> test = new DAG<String>();
-//		assertNull(test.findLCA("A", "C"));
-//		   assertEquals("Testing null inputs", null, DAG.findLCA(null, null, null));
-//		    assertEquals("Testing null inputs", null, LCA.findLowestCommonAncestor(null, a, null));
-//		    assertEquals("Testing null inputs", null, LCA.findLowestCommonAncestor(null, null, b));
-//		// test the array list is empty
-//	}
 
 	@Test
 	public void testOneNode() {
-		DAG<String> test = new DAG<String>();
-		assertEquals("A", test.findLCA("A","B"));
+		Node a = new Node ("a",3);
+		Node b = new Node ("b", 5);
+		a.connectChild(b);
+		ArrayList<Node> test = DAG.listOfAncestors(a);
+		ArrayList<Node> test2 = DAG.listOfAncestors(b);
+		assertEquals("A", DAG.findLCA(test, test2));
 		// test that the first node is its own LCA
 	}
 }
