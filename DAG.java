@@ -1,26 +1,22 @@
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 public class DAG<Key extends Comparable<Key>> {
-	 class Node {
-		Key key;
-		int counter;
-		Node[] parent;
-		Node[] child;
 
-		private Node next, prev;
-		public Node(Key key) {
-			this.key = key;
-			parent = child = null;
+	public static ArrayList<Node> listOfAncestors(Node a){
+		ArrayList<Node> ancestors = new ArrayList<Node>();
+		Node temp = a;
+		while(temp.ancestor != null) {
+			ancestors.add(temp.ancestor);
+			temp = temp.ancestor;
 		}
+		return ancestors;
 	}
-	Node root;
-
-
 	public Key findLCA(Key k1, Key k2) {
 		if ((root == null) || (!exists(k1)) || (!exists(k2))) {
 			return null;
 		} else {
-			return findLCA(root, k1, k2).key;
+			 return findLCA(root, k1, k2).key;
 		}
 	}
 
@@ -30,7 +26,7 @@ public class DAG<Key extends Comparable<Key>> {
 		} else if ((root.key == k1) || (root.key == k2)) {
 			return root;
 		}
-		Node left = findLCA(root.left, k1, k2);
+		Node left = findLCA(root.child, k1, k2);
 		Node right = findLCA(root.right, k1, k2);
 		if ((left != null) && (right != null)) {
 			return root;
@@ -68,7 +64,21 @@ public class DAG<Key extends Comparable<Key>> {
 			}
 		}
 	}
+	public static String ancestorsToString(ArrayList<Node> ancestors){
+		if (ancestors == null) {
+			return null;
+		}
+		String ans = "[";
+		for (int i =0; i < ancestors.size(); i++) {
+			if(i != ancestors.size()-1){
+				ans = ancestors.get(i).key.toString() + ",";
+			}
+			ans += ancestors.get(i).key.toString();
+		}
+		ans += "]";
+		return ans;
 	
+	}
 }//need to connect nodes
 //if a is connected to b and c, and be is connected to c
 //should be a - b - c 
