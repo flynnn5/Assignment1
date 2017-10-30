@@ -3,44 +3,40 @@ import java.util.NoSuchElementException;
 
 public class DAG<Key extends Comparable<Key>> {
 
-	public static ArrayList<Node> listOfAncestors(Node a){
+	public static ArrayList<Node> listOfAncestors(Node a) {
 		ArrayList<Node> ancestors = new ArrayList<Node>();
 		Node temp = a;
-		while(temp.ancestor != null) {
-			ancestors.add(temp.ancestor);
-			temp = temp.ancestor;
+		if (temp != null) {
+			while (temp.ancestor != null) {
+				ancestors.add(temp.ancestor);
+				temp = temp.ancestor;
+			}
 		}
 		return ancestors;
-	}
-	public Key findLCA(Key k1, Key k2) {
-		if ((root == null) || (!exists(k1)) || (!exists(k2))) {
-			return null;
-		} else {
-			 return findLCA(root, k1, k2).key;
-		}
+
 	}
 
-	private Node findLCA(Node root, Key k1, Key k2) {
-		if (root == null) {
+	static Node findLCA(ArrayList<Node> n1List, ArrayList<Node> n2List) {
+		if ((n1List == null) || (n2List == null)) {
 			return null;
-		} else if ((root.key == k1) || (root.key == k2)) {
-			return root;
+		} else if (n1List.size() == 1) {
+			return n1List.get(0);
+		} else if ((n2List.size() == 1)) {
+			return n2List.get(0);
 		}
-		Node left = findLCA(root.child, k1, k2);
-		Node right = findLCA(root.right, k1, k2);
-		if ((left != null) && (right != null)) {
-			return root;
+		for (int loopn1 = 0; loopn1 < n1List.size(); loopn1++) {
+			for (int loopn2 = 0; loopn2 < n2List.size(); loopn2++) {
+				if (n2List.get(loopn2).key.equals(n1List.get(loopn1).key))
+					;
+				{
+					return (n2List.get(loopn2));
+				}
+			}
 		}
-		if (left == null && right == null) {
-			return null;
-		}
-		return left != null ? left : right;
+		return null;
 	}
-	//this will undoubtadly need to be changed
-	//solution- figure out a way to store parents
-	//each time you put a new node in, it should 
-	//store the node it came from, and the node
-	//that node came from etc
+	// in the same way BT looped down until it found the
+	// shared ancestor, we will implement this for a DAG
 
 	public boolean exists(Key k1) {
 		if (exists(root, k1) == k1) {
@@ -64,21 +60,23 @@ public class DAG<Key extends Comparable<Key>> {
 			}
 		}
 	}
-	public static String ancestorsToString(ArrayList<Node> ancestors){
+
+	public static String ancestorsToString(ArrayList<Node> ancestors) {
 		if (ancestors == null) {
 			return null;
 		}
 		String ans = "[";
-		for (int i =0; i < ancestors.size(); i++) {
-			if(i != ancestors.size()-1){
-				ans = ancestors.get(i).key.toString() + ",";
+		for (int i = 0; i < ancestors.size(); i++) {
+			if (i != ancestors.size() - 1) {
+				ans += ancestors.get(i).key.toString() + ",";
+			} else {
+				ans += ancestors.get(i).key.toString();
 			}
-			ans += ancestors.get(i).key.toString();
 		}
 		ans += "]";
 		return ans;
-	
+
 	}
-}//need to connect nodes
-//if a is connected to b and c, and be is connected to c
-//should be a - b - c 
+}// need to connect nodes
+	// if a is connected to b and c, and be is connected to c
+	// should be a - b - c
