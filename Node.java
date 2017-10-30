@@ -1,25 +1,24 @@
 import java.util.ArrayList;
+import java.util.*;
 
-public class Node<String> {
+public class Node<T> {
 
-	public String key;
-	public int data;
-	public ArrayList<Node<String>> edgesTo;
-	public int noOfNodesIn;
-	public int noOfNodesOut;
+	public T key;
+	public T data;
+	public ArrayList<Node<T>> children;
+	public Node<T> ancestor;  
 
-	public Node (String key, int value) {
+	public Node (T key, T value) {
 		this.key = key;
 		this.data = value;
-		edgesTo = new ArrayList<Node<String>>();
-		noOfNodesIn =0;
-		noOfNodesOut = edgesTo.size();
+		children = new ArrayList<Node<T>>();
+		ancestor = null;
 	}
-	//add an edge and connect a parent node to a child
-	public void connectChild(Node<String> child){
+	
+	public void connectChild(Node<T> child){
 		if (child != null){
-			this.edgesTo.add(child);
-			child.noOfNodesIn++;
+			this.children.add(child);
+			child.ancestor = this;
 		}
 	}
 	
