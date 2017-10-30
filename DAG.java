@@ -19,11 +19,12 @@ public class DAG<Key extends Comparable<Key>> {
 	static Node findLCA(ArrayList<Node> n1List, ArrayList<Node> n2List) {
 		if ((n1List == null) || (n2List == null)) {
 			return null;
-		} else if (n1List.size() == 1) {
-			return n1List.get(0);
-		} else if ((n2List.size() == 1)) {
-			return n2List.get(0);
 		}
+//		} else if (n1List.size() == 1) {
+//			return n1List.get(0);
+//		} else if ((n2List.size() == 1)) {
+//			return n2List.get(0);
+//		}
 		for (int loopn1 = 0; loopn1 < n1List.size(); loopn1++) {
 			for (int loopn2 = 0; loopn2 < n2List.size(); loopn2++) {
 				if (n2List.get(loopn2).key.equals(n1List.get(loopn1).key))
