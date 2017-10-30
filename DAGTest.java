@@ -45,14 +45,41 @@ public class DAGTest {
 	}
 
 	@Test
-	public void testOneNode() {
+	public void testTwoChildren() {
 		Node a = new Node ("a",3);
 		Node b = new Node ("b", 5);
+		Node c = new Node ("c", 6);		
 		a.connectChild(b);
-		ArrayList<Node> test = DAG.listOfAncestors(a);
+		b.connectChild(c);
+		//b.connectChild(d);
+
+		
+		ArrayList<Node> test1 = DAG.listOfAncestors(c);
 		ArrayList<Node> test2 = DAG.listOfAncestors(b);
-		assertEquals("A", DAG.findLCA(test, test2));
+		assertEquals(a, DAG.findLCA(test1, test2));
 		// test that the first node is its own LCA
+	}
+	public void testOneNodeLCA(){
+		Node a = new Node ("a",34);
+		ArrayList<Node> test = DAG.listOfAncestors(a);
+		assertNull(DAG.findLCA(test, test));
+	}
+	public void testOneShortPath() {
+		Node a = new Node ("a",3);
+		Node b = new Node ("b", 5);
+		Node c = new Node ("c", 6);		
+		Node d = new Node ("d", 45);		
+		Node e = new Node ("e", 34);		
+
+		a.connectChild(b);
+		b.connectChild(c);
+		a.connectChild(e);
+		c.connectChild(d);
+		ArrayList<Node> test = DAG.listOfAncestors(e);
+		ArrayList<Node> test2 = DAG.listOfAncestors(d);
+		
+		assertEquals("Testing one short path", DAG.findLCA(test, test2));
+
 	}
 }
 
