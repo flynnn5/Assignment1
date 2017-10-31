@@ -40,8 +40,7 @@ public class DAGTest {
 	public void testEmptyLCA() {
 		ArrayList<Node> test = DAG.listOfAncestors(null);
 		assertEquals("Testing LCA on null", null, DAG.findLCA(null,null));
-	}
-
+	}	
 	@Test
 	public void testTwoChildren() {
 		Node a = new Node ("a",3);
@@ -50,26 +49,13 @@ public class DAGTest {
 		a.connectChild(b);
 		a.connectChild(c);
 		//b.connectChild(d);
-
-		
-		ArrayList<Node> test1 = DAG.listOfAncestors(c);
-		ArrayList<Node> test2 = DAG.listOfAncestors(b);
-		assertEquals(a, DAG.findLCA(test1, test2));
+		assertEquals(a, DAG.findLCA(b, c));
 		// test that the first node is its own LCA
 	}
 	@Test
-	public void testSameList(){
+	public void testSameNodeLCA(){
 		Node a = new Node ("a",34);
-		ArrayList<Node> test = DAG.listOfAncestors(a);
-		assertEquals(a,DAG.findLCA(test, test));
-		
-		Node b = new Node ("b",333);
-		Node c = new Node ("c", 212);
-		Node d = new Node ("d", 22);
-		b.connectChild(c);
-		c.connectChild(d);
-		ArrayList<Node> test2 = DAG.listOfAncestors(d);
-		assertEquals(d, DAG.listOfAncestors(d));
+		assertEquals(a.data, DAG.findLCA(a,a).data);
 
 	}
 	@Test
@@ -84,10 +70,9 @@ public class DAGTest {
 		b.connectChild(c);
 		a.connectChild(e);
 		c.connectChild(d);
-		ArrayList<Node> test = DAG.listOfAncestors(e);
-		ArrayList<Node> test2 = DAG.listOfAncestors(d);
+	
 		
-		assertEquals("Testing one short path",a, DAG.findLCA(test, test2));
+		assertEquals("Testing one short path",a, DAG.findLCA(e, d));
 
 	}
 

@@ -16,19 +16,27 @@ public class DAG<Key extends Comparable<Key>> {
 
 	}
 
-	static Node findLCA(ArrayList<Node> n1List, ArrayList<Node> n2List) {
-		if ((n1List == null) || (n2List == null)) {
+	static Node root;
+
+	static Node findLCA(Node n1, Node n2) {
+		if ((n1 == null) || (n2 == null)) {
 			return null;
+		} 
+		else if (n1.ancestor == null){
+			return n1;
 		}
-//		} else if (n1List.size() == 1) {
-//			return n1List.get(0);
-//		} else if ((n2List.size() == 1)) {
-//			return n2List.get(0);
-//		}
+		else if (n2.ancestor== null){
+			return n2;
+		}
+		else if  (n1==n2){
+			return n1;
+		}
+		ArrayList<Node> n1List = DAG.listOfAncestors(n1);
+		ArrayList<Node> n2List = DAG.listOfAncestors(n2);
+
 		for (int loopn1 = 0; loopn1 < n1List.size(); loopn1++) {
 			for (int loopn2 = 0; loopn2 < n2List.size(); loopn2++) {
 				if (n2List.get(loopn2).key.equals(n1List.get(loopn1).key))
-					;
 				{
 					return (n2List.get(loopn2));
 				}
