@@ -9,32 +9,30 @@ public class DAGTest {
 	
 	@Test
 	public void testListOfAncestors(){
-		ArrayList<Node> nullList = DAG.listOfAncestors(null);
-		assertEquals("testing ancestry of null", "[]", DAG.ancestorsToString(nullList));
 		Node a = new Node ("a" ,1);
 		ArrayList<Node> aList = DAG.listOfAncestors(a);
 		String STRaList = DAG.ancestorsToString(aList);
-		assertEquals("Testing ancestry of a", "[]", STRaList);
+		assertEquals("Testing ancestry of a", "[a]", STRaList);
 		
 		
 		Node b = new Node ("b", 2);
 		a.connectChild(b);
 		ArrayList<Node> bList =DAG.listOfAncestors(b);
 		String STRbList = DAG.ancestorsToString(bList);
-		assertEquals("Testing one parent", "[a]", STRbList);
+		assertEquals("Testing one parent", "[b,a]", STRbList);
 		
 		
 		Node c = new Node ("c",3);
 		b.connectChild(c);
 		ArrayList<Node> cList = DAG.listOfAncestors(c);
 		String STRcList = DAG.ancestorsToString(cList);
-		assertEquals ("Testing two ancestors", "[b,a]", STRcList);
+		assertEquals ("Testing two ancestors", "[c,b,a]", STRcList);
 		
 		Node d = new Node("d", 4);
 		b.connectChild(d);
 		ArrayList<Node> dList = DAG.listOfAncestors(d);
 		String STRdList = DAG.ancestorsToString(dList);
-		assertEquals ("Testing two ancestors", "[b,a]", STRdList);
+		assertEquals ("Testing two ancestors", "[d,b,a]", STRdList);
 	}
 	@Test
 	public void testEmptyLCA() {
@@ -73,6 +71,37 @@ public class DAGTest {
 	
 		
 		assertEquals("Testing one short path",a, DAG.findLCA(e, d));
+
+	}
+	@Test
+	public void testLCA(){
+		Node a = new Node("a", 23);
+		Node b = new Node("b", 2);
+		Node c = new Node("c", 3);
+		Node d = new Node("d", 4);
+		Node e = new Node("e", 9);
+		Node f = new Node("f", 222);
+		Node g = new Node("g", 21);
+		Node h = new Node("h", 263);
+		
+		a.connectChild(b);
+		a.connectChild(c);
+		b.connectChild(d);
+		b.connectChild(e);
+		b.connectChild(f);
+		d.connectChild(g);
+		f.connectChild(e);
+		e.connectChild(g);
+		f.connectChild(h);
+		
+		assertEquals(a,DAG.findLCA(b, c));
+		assertEquals(b,DAG.findLCA(d, e));
+		assertEquals(b,DAG.findLCA(d, f));
+		assertEquals(f,DAG.findLCA(e, f));
+		assertEquals(b, DAG.findLCA(h, d));
+		assertEquals(b, DAG.findLCA(d, b));
+		assertEquals(b, DAG.findLCA(b,d));
+
 
 	}
 

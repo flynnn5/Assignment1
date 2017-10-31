@@ -5,6 +5,7 @@ public class DAG<Key extends Comparable<Key>> {
 
 	public static ArrayList<Node> listOfAncestors(Node a) {
 		ArrayList<Node> ancestors = new ArrayList<Node>();
+		ancestors.add(a);
 		Node temp = a;
 		if (temp != null) {
 			while (temp.ancestor != null) {
@@ -21,28 +22,30 @@ public class DAG<Key extends Comparable<Key>> {
 	static Node findLCA(Node n1, Node n2) {
 		if ((n1 == null) || (n2 == null)) {
 			return null;
-		} 
-		else if (n1.ancestor == null){
-			return n1;
 		}
-		else if (n2.ancestor== null){
-			return n2;
-		}
-		else if  (n1==n2){
-			return n1;
-		}
+		// } else if (n1.ancestor == null) {
+		// return n1;
+		// } else if (n2.ancestor == null) {
+		// return n2;
+	else if(n1==n2)
+
+	{
+		return n1;
+	} else
+
+	{
 		ArrayList<Node> n1List = DAG.listOfAncestors(n1);
 		ArrayList<Node> n2List = DAG.listOfAncestors(n2);
 
 		for (int loopn1 = 0; loopn1 < n1List.size(); loopn1++) {
 			for (int loopn2 = 0; loopn2 < n2List.size(); loopn2++) {
-				if (n2List.get(loopn2).key.equals(n1List.get(loopn1).key))
-				{
+				if (n2List.get(loopn2).key.equals(n1List.get(loopn1).key)) {
 					return (n2List.get(loopn2));
 				}
 			}
 		}
-		return null;
+	} return null;
+
 	}
 	// in the same way BT looped down until it found the
 	// shared ancestor, we will implement this for a DAG
